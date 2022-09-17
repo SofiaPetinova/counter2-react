@@ -1,7 +1,8 @@
 import {useState} from "react";
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
-import CountersWrapper from "./counters/CountersWrapper";
+import CountersWrapper from "./components/counters/CountersWrapper";
+import AddCounter from "./components/buttons/AddCounter";
 
 
 function App() {
@@ -33,9 +34,19 @@ function App() {
         setCounters(newCounters);
     }
 
+    function addCounter () {
+        const newCounters = [...counters, {
+            id: uuidv4(),
+            value: counters.length === 0 ? 1 : counters[counters.length-1].value + 1}]
+        setCounters(newCounters)
+    }
+
+    console.log(counters)
+
     return (
         <div className="App">
             <h1>Counter</h1>
+            <AddCounter addCounter={addCounter} />
             <CountersWrapper countersWrapper={counters}
                              minus={minus}
                              plus={plus}
